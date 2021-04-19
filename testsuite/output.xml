@@ -1,0 +1,430 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 4.0 (Python 3.8.5 on win32)" generated="20210419 15:00:58.388" rpa="false" schemaversion="2">
+<suite id="s1" name="Login To Application" source="D:\aiml\testsuite\login to application.robot">
+<test id="s1-t1" name="login to application">
+<kw name="Test Setup" library="keywords-coordinates" type="SETUP">
+<kw name="Append To Environment Variable" library="OperatingSystem">
+<arg>Path</arg>
+<arg>${EXECDIR}${/}driver${/}</arg>
+<doc>Appends given ``values`` to environment variable ``name``.</doc>
+<msg timestamp="20210419 15:02:24.068" level="INFO">Environment variable 'Path' set to value 'C:\Users\40012751\Anaconda3;C:\Users\40012751\Anaconda3\Library\mingw-w64\bin;C:\Users\40012751\Anaconda3\Library\usr\bin;C:\Users\40012751\Anaconda3\Library\bin;C:\Users\40012751\Anaconda3\Scripts;C:\Users\40012751\Anaconda3\bin;C:\Users\40012751\Anaconda3\condabin;D:\aiml\driver;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\windows\system32;C:\windows;C:\windows\System32\Wbem;C:\windows\System32\WindowsPowerShell\v1.0;C:\windows\System32\OpenSSH;C:\Program Files\TortoiseSVN\bin;C:\Program Files (x86)\Webex\Plugins;C:\Program Files\Git\cmd;D:\aiml\driver;C:\Users\40012751\AppData\Local\Programs\Python\Python39\Scripts;C:\Users\40012751\AppData\Local\Programs\Python\Python39;C:\python\Scripts;C:\python;C:\Users\40012751\AppData\Local\Microsoft\WindowsApps;.;c:\users\40012751\anaconda3\lib\site-packages\scipy\.libs;D:\aiml\testsuite\driver\'.</msg>
+<status status="PASS" starttime="20210419 15:02:24.068" endtime="20210419 15:02:24.068"/>
+</kw>
+<kw name="Open Browser" library="SeleniumLibrary">
+<arg>browser=${BROWSER}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<msg timestamp="20210419 15:02:24.068" level="INFO">Opening browser 'chrome' to base url 'None'.</msg>
+<status status="PASS" starttime="20210419 15:02:24.068" endtime="20210419 15:02:37.477"/>
+</kw>
+<kw name="Maximize Browser Window" library="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" starttime="20210419 15:02:37.478" endtime="20210419 15:02:37.625"/>
+</kw>
+<kw name="Set Browser Implicit Wait" library="SeleniumLibrary">
+<arg>10s</arg>
+<doc>Sets the implicit wait value used by Selenium.</doc>
+<status status="PASS" starttime="20210419 15:02:37.626" endtime="20210419 15:02:37.634"/>
+</kw>
+<status status="PASS" starttime="20210419 15:02:24.068" endtime="20210419 15:02:37.634"/>
+</kw>
+<kw name="Launch App" library="keywords-coordinates">
+<arg>https://spuul.com/login</arg>
+<kw name="Go To" library="SeleniumLibrary">
+<arg>${URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<msg timestamp="20210419 15:02:37.637" level="INFO">Opening url 'https://spuul.com/login'</msg>
+<status status="PASS" starttime="20210419 15:02:37.636" endtime="20210419 15:02:39.399"/>
+</kw>
+<status status="PASS" starttime="20210419 15:02:37.635" endtime="20210419 15:02:39.399"/>
+</kw>
+<kw name="Login" library="keywords-coordinates">
+<var>${status}</var>
+<arg>https://spuul.com/login</arg>
+<arg>tautomation40012@gmail.com</arg>
+<arg>Psnumber#40012</arg>
+<kw name="Select Profile" library="keywords-coordinates">
+<var>${profile_status}</var>
+<arg>profileicon</arg>
+<kw name="Xpath" library="xpath">
+<var>@{LOGIN_PROFILE_ICON}</var>
+<arg>${value}</arg>
+<msg timestamp="20210419 15:02:39.766" level="INFO">@{LOGIN_PROFILE_ICON} = [ None | None ]</msg>
+<status status="PASS" starttime="20210419 15:02:39.400" endtime="20210419 15:02:39.766"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${is_none}</var>
+<arg>Should Not Be Equal</arg>
+<arg>${LOGIN_PROFILE_ICON}[0]</arg>
+<arg>${None}</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Should Not Be Equal" library="BuiltIn">
+<arg>${LOGIN_PROFILE_ICON}[0]</arg>
+<arg>${None}</arg>
+<doc>Fails if the given objects are equal.</doc>
+<msg timestamp="20210419 15:02:39.767" level="FAIL">None == None</msg>
+<status status="FAIL" starttime="20210419 15:02:39.767" endtime="20210419 15:02:39.767"/>
+</kw>
+<msg timestamp="20210419 15:02:39.768" level="INFO">${is_none} = False</msg>
+<status status="PASS" starttime="20210419 15:02:39.766" endtime="20210419 15:02:39.768"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>"${is_none}"=="True"</arg>
+<arg>Click Coordinates</arg>
+<arg>${LOGIN_PROFILE_ICON}[0]</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" starttime="20210419 15:02:39.768" endtime="20210419 15:02:39.768"/>
+</kw>
+<msg timestamp="20210419 15:02:39.768" level="INFO">${profile_status} = False</msg>
+<status status="PASS" starttime="20210419 15:02:39.399" endtime="20210419 15:02:39.768"/>
+</kw>
+<kw name="Select Signin Icon" library="keywords-coordinates">
+<var>${signin_icon_status}</var>
+<kw name="Xpath" library="xpath">
+<var>@{LOGIN_ICON}</var>
+<arg>signinbutton</arg>
+<msg timestamp="20210419 15:02:39.779" level="INFO">@{LOGIN_ICON} = [ None | None ]</msg>
+<status status="PASS" starttime="20210419 15:02:39.769" endtime="20210419 15:02:39.779"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${is_none}</var>
+<arg>Should Not Be Equal</arg>
+<arg>${LOGIN_ICON}[0]</arg>
+<arg>${None}</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Should Not Be Equal" library="BuiltIn">
+<arg>${LOGIN_ICON}[0]</arg>
+<arg>${None}</arg>
+<doc>Fails if the given objects are equal.</doc>
+<msg timestamp="20210419 15:02:39.781" level="FAIL">None == None</msg>
+<status status="FAIL" starttime="20210419 15:02:39.780" endtime="20210419 15:02:39.781"/>
+</kw>
+<msg timestamp="20210419 15:02:39.781" level="INFO">${is_none} = False</msg>
+<status status="PASS" starttime="20210419 15:02:39.779" endtime="20210419 15:02:39.781"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>"${is_none}"=="True"</arg>
+<arg>Click Coordinates</arg>
+<arg>${LOGIN_ICON}[0]</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" starttime="20210419 15:02:39.781" endtime="20210419 15:02:39.782"/>
+</kw>
+<msg timestamp="20210419 15:02:39.782" level="INFO">${signin_icon_status} = False</msg>
+<status status="PASS" starttime="20210419 15:02:39.769" endtime="20210419 15:02:39.782"/>
+</kw>
+<kw name="Verify Loginpage" library="keywords-coordinates">
+<var>${login_page_visibility}</var>
+<kw name="Xpath" library="xpath">
+<var>@{SIGN_IN}</var>
+<arg>usernametextbox</arg>
+<msg timestamp="20210419 15:02:39.795" level="INFO">@{SIGN_IN} = [ None | None ]</msg>
+<status status="PASS" starttime="20210419 15:02:39.783" endtime="20210419 15:02:39.795"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${is_none}</var>
+<arg>Should Not Be Equal</arg>
+<arg>${SIGN_IN}[0]</arg>
+<arg>${None}</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Should Not Be Equal" library="BuiltIn">
+<arg>${SIGN_IN}[0]</arg>
+<arg>${None}</arg>
+<doc>Fails if the given objects are equal.</doc>
+<msg timestamp="20210419 15:02:39.796" level="FAIL">None == None</msg>
+<status status="FAIL" starttime="20210419 15:02:39.796" endtime="20210419 15:02:39.796"/>
+</kw>
+<msg timestamp="20210419 15:02:39.797" level="INFO">${is_none} = False</msg>
+<status status="PASS" starttime="20210419 15:02:39.795" endtime="20210419 15:02:39.797"/>
+</kw>
+<msg timestamp="20210419 15:02:39.797" level="INFO">${login_page_visibility} = False</msg>
+<status status="PASS" starttime="20210419 15:02:39.783" endtime="20210419 15:02:39.797"/>
+</kw>
+<kw name="Detector" library="keywords-coordinates">
+<kw name="Sleep" library="BuiltIn">
+<arg>5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20210419 15:02:44.802" level="INFO">Slept 5 seconds</msg>
+<status status="PASS" starttime="20210419 15:02:39.798" endtime="20210419 15:02:44.802"/>
+</kw>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<arg>${IMAGE_PATH}</arg>
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<msg timestamp="20210419 15:02:44.912" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="../screenshot/input.png"&gt;&lt;img src="../screenshot/input.png" width="800px"&gt;&lt;/a&gt;</msg>
+<status status="PASS" starttime="20210419 15:02:44.802" endtime="20210419 15:02:44.912"/>
+</kw>
+<kw name="Detect" library="integrated">
+<msg timestamp="20210419 15:02:56.711" level="INFO">c:\users\40012751\anaconda3\lib\site-packages\tensorflow\python\data\ops\dataset_ops.py:3503: UserWarning: Even though the tf.config.experimental_run_functions_eagerly option is set, this option does not apply to tf.data functions. tf.data functions are still traced and executed as graphs.
+  warnings.warn(</msg>
+<status status="PASS" starttime="20210419 15:02:44.912" endtime="20210419 15:02:56.711"/>
+</kw>
+<status status="PASS" starttime="20210419 15:02:39.797" endtime="20210419 15:02:56.712"/>
+</kw>
+<kw name="Html Source" library="keywords-coordinates">
+<var>${value}</var>
+<kw name="Execute Javascript" library="SeleniumLibrary">
+<var>${value}</var>
+<arg>return document.body.innerHTML</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<msg timestamp="20210419 15:02:56.714" level="INFO">Executing JavaScript:
+return document.body.innerHTML
+Without any arguments.</msg>
+<msg timestamp="20210419 15:02:56.725" level="INFO">${value} = 
+
+&lt;noscript&gt;&lt;iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WTJ3TX7"
+height="0" width="0" style="display:none;visibility:hidden"&gt;&lt;/iframe&gt;&lt;/noscript&gt;
+
+&lt;div class="app"&gt;
+&lt;div class="notifi...</msg>
+<status status="PASS" starttime="20210419 15:02:56.713" endtime="20210419 15:02:56.725"/>
+</kw>
+<kw name="Create File" library="OperatingSystem">
+<arg>javascript.html</arg>
+<arg>${value}</arg>
+<doc>Creates a file with the given content and encoding.</doc>
+<msg timestamp="20210419 15:02:56.727" level="INFO" html="true">Created file '&lt;a href="file://D:\aiml\testsuite\javascript.html"&gt;D:\aiml\testsuite\javascript.html&lt;/a&gt;'.</msg>
+<status status="PASS" starttime="20210419 15:02:56.725" endtime="20210419 15:02:56.727"/>
+</kw>
+<msg timestamp="20210419 15:02:56.727" level="INFO">${value} = 
+
+&lt;noscript&gt;&lt;iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WTJ3TX7"
+height="0" width="0" style="display:none;visibility:hidden"&gt;&lt;/iframe&gt;&lt;/noscript&gt;
+
+&lt;div class="app"&gt;
+&lt;div class="notifi...</msg>
+<status status="PASS" starttime="20210419 15:02:56.712" endtime="20210419 15:02:56.727"/>
+</kw>
+<kw name="Extractor And Integrator" library="keywords-coordinates">
+<arg>${value}</arg>
+<kw name="Execute Javascript" library="SeleniumLibrary">
+<var>${url}</var>
+<arg>return window.location.href</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<msg timestamp="20210419 15:02:56.728" level="INFO">Executing JavaScript:
+return window.location.href
+Without any arguments.</msg>
+<msg timestamp="20210419 15:02:56.735" level="INFO">${url} = https://spuul.com/login</msg>
+<status status="PASS" starttime="20210419 15:02:56.728" endtime="20210419 15:02:56.735"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${url}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20210419 15:02:56.735" endtime="20210419 15:02:56.736"/>
+</kw>
+<kw name="Get Session Id" library="SeleniumLibrary">
+<var>${session_id}</var>
+<doc>Returns the currently active browser session id.</doc>
+<msg timestamp="20210419 15:02:56.736" level="INFO">${session_id} = 0510685cf3532f7c5adaa5cd1b0a769c</msg>
+<status status="PASS" starttime="20210419 15:02:56.736" endtime="20210419 15:02:56.736"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${session_id}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20210419 15:02:56.737" endtime="20210419 15:02:56.737"/>
+</kw>
+<kw name="Add Cookie" library="SeleniumLibrary">
+<arg>foo</arg>
+<arg>bar</arg>
+<doc>Adds a cookie to your current session.</doc>
+<status status="PASS" starttime="20210419 15:02:56.737" endtime="20210419 15:02:56.745"/>
+</kw>
+<kw name="Get Cookie" library="SeleniumLibrary">
+<var>${cookie}</var>
+<arg>foo</arg>
+<doc>Returns information of cookie with ``name`` as an object.</doc>
+<msg timestamp="20210419 15:02:56.753" level="INFO">${cookie} = name=foo
+value=bar
+path=/
+domain=spuul.com
+secure=True
+httpOnly=False
+expiry=None</msg>
+<status status="PASS" starttime="20210419 15:02:56.746" endtime="20210419 15:02:56.753"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${cookie}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20210419 15:02:56.753" endtime="20210419 15:02:56.754"/>
+</kw>
+<kw name="Get Cookies" library="SeleniumLibrary">
+<var>${cookies_list}</var>
+<doc>Returns all cookies of the current page.</doc>
+<msg timestamp="20210419 15:02:56.762" level="INFO">${cookies_list} = foo=bar; _gid=GA1.2.1744434734.1618824759; _ga=GA1.2.1330365053.1618824759</msg>
+<status status="PASS" starttime="20210419 15:02:56.754" endtime="20210419 15:02:56.762"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${cookie}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20210419 15:02:56.763" endtime="20210419 15:02:56.763"/>
+</kw>
+<kw name="Session Creator" library="integrated">
+<arg>${url}</arg>
+<msg timestamp="20210419 15:03:05.486" level="FAIL">WebDriverException: Message: unknown error: net::ERR_CONNECTION_RESET
+  (Session info: chrome=90.0.4430.72)
+</msg>
+<status status="FAIL" starttime="20210419 15:02:56.764" endtime="20210419 15:03:05.487"/>
+</kw>
+<kw name="Merger" library="integrated">
+<status status="NOT RUN" starttime="20210419 15:03:05.487" endtime="20210419 15:03:05.487"/>
+</kw>
+<status status="FAIL" starttime="20210419 15:02:56.727" endtime="20210419 15:03:05.487"/>
+</kw>
+<kw name="Xpath" library="xpath">
+<var>@{USERNAME_ID}</var>
+<arg>usernametextbox</arg>
+<status status="NOT RUN" starttime="20210419 15:03:05.487" endtime="20210419 15:03:05.487"/>
+</kw>
+<kw name="Xpath" library="xpath">
+<var>@{PASSWORD}</var>
+<arg>passwordtextbox</arg>
+<status status="NOT RUN" starttime="20210419 15:03:05.487" endtime="20210419 15:03:05.488"/>
+</kw>
+<kw name="Xpath" library="xpath">
+<var>@{SIGN_IN}</var>
+<arg>loginbutton</arg>
+<status status="NOT RUN" starttime="20210419 15:03:05.488" endtime="20210419 15:03:05.488"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>2s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" starttime="20210419 15:03:05.488" endtime="20210419 15:03:05.488"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>"${login_page_visibility}" == "True"</arg>
+<arg>Page Should Contain Element</arg>
+<arg>${USERNAME_ID}[1]</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="NOT RUN" starttime="20210419 15:03:05.488" endtime="20210419 15:03:05.488"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>"${login_page_visibility}" == "True"</arg>
+<arg>Input Text</arg>
+<arg>${USERNAME_ID}[1]</arg>
+<arg>${uname}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="NOT RUN" starttime="20210419 15:03:05.488" endtime="20210419 15:03:05.488"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${pass}</var>
+<arg>Page Should Contain Element</arg>
+<arg>${PASSWORD}[1]</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<status status="NOT RUN" starttime="20210419 15:03:05.489" endtime="20210419 15:03:05.489"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>2s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" starttime="20210419 15:03:05.489" endtime="20210419 15:03:05.489"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>"${pass}" == "False"</arg>
+<arg>Press Keys</arg>
+<arg>None</arg>
+<arg>ENTER</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="NOT RUN" starttime="20210419 15:03:05.489" endtime="20210419 15:03:05.489"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${pname}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" starttime="20210419 15:03:05.489" endtime="20210419 15:03:05.489"/>
+</kw>
+<kw name="Input Password" library="SeleniumLibrary">
+<arg>${PASSWORD}[1]</arg>
+<arg>${pname}</arg>
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<status status="NOT RUN" starttime="20210419 15:03:05.490" endtime="20210419 15:03:05.490"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${is_none}</var>
+<arg>Should Not Be Equal</arg>
+<arg>${SIGN_IN}[1]</arg>
+<arg>${None}</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<status status="NOT RUN" starttime="20210419 15:03:05.490" endtime="20210419 15:03:05.491"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" starttime="20210419 15:03:05.491" endtime="20210419 15:03:05.491"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${SIGN_IN}[0]</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" starttime="20210419 15:03:05.491" endtime="20210419 15:03:05.492"/>
+</kw>
+<kw name="Click Coordinates" library="keywords-coordinates">
+<arg>${SIGN_IN}[0]</arg>
+<status status="NOT RUN" starttime="20210419 15:03:05.492" endtime="20210419 15:03:05.492"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" starttime="20210419 15:03:05.492" endtime="20210419 15:03:05.492"/>
+</kw>
+<kw name="Verify Homepage" library="keywords-coordinates">
+<var>${status}</var>
+<status status="NOT RUN" starttime="20210419 15:03:05.492" endtime="20210419 15:03:05.492"/>
+</kw>
+<status status="FAIL" starttime="20210419 15:02:39.399" endtime="20210419 15:03:05.493"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>"${status}"=="True"</arg>
+<arg>Log To Console</arg>
+<arg>Login successful</arg>
+<arg>ELSE</arg>
+<arg>Fail</arg>
+<arg>Login failed</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="NOT RUN" starttime="20210419 15:03:05.493" endtime="20210419 15:03:05.494"/>
+</kw>
+<kw name="Verify Homepage" library="keywords-coordinates">
+<var>${status}</var>
+<status status="NOT RUN" starttime="20210419 15:03:05.494" endtime="20210419 15:03:05.494"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>"${status}"=="True"</arg>
+<arg>Log To Console</arg>
+<arg>Verify Homepage successful</arg>
+<arg>ELSE</arg>
+<arg>Fail</arg>
+<arg>Verify Homepage failed</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="NOT RUN" starttime="20210419 15:03:05.495" endtime="20210419 15:03:05.495"/>
+</kw>
+<kw name="Run Keyword If Test Failed" library="BuiltIn" type="TEARDOWN">
+<arg>Test Fail Teardown</arg>
+<doc>Runs the given keyword with the given arguments, if the test failed.</doc>
+<kw name="Test Fail Teardown" library="keywords-coordinates">
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<arg>${FAILURE_IMAGE_PATH}</arg>
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<msg timestamp="20210419 15:03:05.614" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="../screenshot/failed.png"&gt;&lt;img src="../screenshot/failed.png" width="800px"&gt;&lt;/a&gt;</msg>
+<status status="PASS" starttime="20210419 15:03:05.497" endtime="20210419 15:03:05.614"/>
+</kw>
+<kw name="Close Browser" library="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" starttime="20210419 15:03:05.614" endtime="20210419 15:03:09.183"/>
+</kw>
+<status status="PASS" starttime="20210419 15:03:05.496" endtime="20210419 15:03:09.183"/>
+</kw>
+<status status="PASS" starttime="20210419 15:03:05.495" endtime="20210419 15:03:09.183"/>
+</kw>
+<status status="FAIL" starttime="20210419 15:02:24.068" endtime="20210419 15:03:09.184">WebDriverException: Message: unknown error: net::ERR_CONNECTION_RESET
+  (Session info: chrome=90.0.4430.72)
+</status>
+</test>
+<doc>login to application</doc>
+<status status="FAIL" starttime="20210419 15:00:58.404" endtime="20210419 15:03:09.186"/>
+</suite>
+<statistics>
+<total>
+<stat pass="0" fail="1" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="0" fail="1" skip="0" id="s1" name="Login To Application">Login To Application</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

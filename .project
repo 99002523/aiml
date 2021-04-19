@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>aiml</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>org.robotframework.ide.eclipse.main.plugin.robotLibrariesBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>org.robotframework.ide.eclipse.main.plugin.robotNature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>libspecs/Reserved.py</name>
+			<type>1</type>
+			<location>C:/Users/20130212/AppData/Local/Programs/Python/Python38/lib/site-packages/robot/libraries/Reserved.py</location>
+		</link>
+	</linkedResources>
+</projectDescription>

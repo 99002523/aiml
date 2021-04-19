@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<projectConfiguration>
+    <configVersion>2</configVersion>
+    <relativeTo>WORKSPACE</relativeTo>
+    <referencedLibrary type="PYTHON" name="SeleniumLibrary" path="C:/Users/20130212/AppData/Local/Programs/Python/Python38/Lib/site-packages/SeleniumLibrary/__init__.py" dynamic="false"/>
+    <referencedLibrary type="PYTHON" name="xlsparser" path="aiml/python/xlsparser.py" dynamic="false"/>
+    <referencedLibrary type="PYTHON" name="xlsxparser" path="aiml/python/xlsxparser.py" dynamic="false"/>
+    <pythonpath/>
+    <classpath/>
+    <excludedForValidation/>
+    <isValidatedFileSizeCheckingEnabled>true</isValidatedFileSizeCheckingEnabled>
+    <validatedFileMaxSize>1024</validatedFileMaxSize>
+</projectConfiguration>
