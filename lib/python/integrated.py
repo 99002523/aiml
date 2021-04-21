@@ -235,7 +235,7 @@ class Xpath_Util:
         self.button_contains_xpath = "//%s[contains(%s,'%s')]"%(tag,attr,element)
         return self.button_contains_xpath
 #-------START OF SCRIPT--------
-def xextract(driver):
+def xextract(driver,url,session_id):
 
     #print ("Start of %s"%__file__)
     #driver = webdriver.Chrome(r"D:\aiml\driver\chromedriver.exe")
@@ -247,13 +247,13 @@ def xextract(driver):
     #    print ("No XPaths generated for the URL:%s"%url)
     #driver.quit()
     xpath_obj = Xpath_Util()
-    #driver = webdriver.Remote(command_executor=url,desired_capabilities={})
-    #driver.session_id = session_id
-    page = driver.execute_script("return document.body.innerHTML").\
+    driver2 = webdriver.Remote(command_executor=url,desired_capabilities={})
+    driver2.session_id = session_id
+    page = driver2.execute_script("return document.body.innerHTML").\
     encode('utf-8').decode('latin-1')#returns the inner HTML as a string
     soup = BeautifulSoup(page, 'html.parser')
     #execute generate_xpath
-    if xpath_obj.generate_xpath(soup,driver,xpath_obj) is False:
+    if xpath_obj.generate_xpath(soup,driver2,xpath_obj) is False:
         print("1")
         print ("No XPaths generated for the URL:%s"%url)
     driver.quit()
@@ -352,42 +352,11 @@ def merger():
 #merger()
 
 
-
-
-
-def create_driver_session(session_id, executor_url):
-    from selenium.webdriver.remote.webdriver import WebDriver as RemoteWebDriver
-
-    # Save the original function, so we can revert our patch
-    org_command_execute = RemoteWebDriver.execute
-
-    def new_command_execute(self, command, params=None):
-        if command == "newSession":
-            # Mock the response
-            return {'success': 0, 'value': None, 'sessionId': session_id}
-        else:
-            return org_command_execute(self, command, params)
-
-    # Patch the function before creating the driver object
-    RemoteWebDriver.execute = new_command_execute
-
-    new_driver = webdriver.Remote(command_executor=executor_url, desired_capabilities={})
-    new_driver.session_id = session_id
-
-    # Replace the patched function with original function
-    RemoteWebDriver.execute = org_command_execute
-
-    return new_driver
-
-def session_creator(url):
+def session_creator(url, cookies):
     from selenium import webdriver
     driver = webdriver.Chrome()
     executor_url = driver.command_executor._url
     session_id = driver.session_id
     driver.get(url)
     #driver.quit()
-    xextract(driver)
-
-
-
-
+    xextract(driver,executor_url, session_id)
