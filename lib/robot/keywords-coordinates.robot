@@ -183,17 +183,17 @@ Detector
 
 Extractor And Integrator
     [Arguments]    ${value}
-	${url}    Execute Javascript  return window.location.href
-	Log To Console    ${url}
-	${session_id}    Get Session Id
-	Log To Console    ${session_id}
-	Add Cookie    foo    bar
-	${cookie}    Get Cookie    foo
-	Log To Console    ${cookie}  
-	${cookies_list}    Get Cookies
-	Log To Console    ${cookie}
-	session_creator    ${url}
-    #xextract    ${url}    ${value}    ${session_id}   
+	#${url}    Execute Javascript  return window.location.href
+	#Log To Console    ${url}
+	#${session_id}    Get Session Id
+	#Log To Console    ${session_id}
+	#Add Cookie    foo    bar
+	#${cookie}    Get Cookie    foo
+	#Log To Console    ${cookie}  
+	#${cookies_list}    Get Cookies
+	#Log To Console    ${cookies_list}
+	#session_creator    ${url}    ${cookies_list}
+    xextract    ${value}  
 	merger
 	
 #keyword calling object detection
@@ -207,7 +207,7 @@ Click Coordinates
 #keyword to get html source
 Html Source
     ${value}    Execute JavaScript    return document.body.innerHTML
+	Create File    ${JAVA_SCRIPT_PATH}     ${value}
 	[Return]    ${value}
-	Create File    javascript.html     ${value}
 	#${value}    Get Source
 	#Create File   source.html    ${value}
