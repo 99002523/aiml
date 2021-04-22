@@ -235,28 +235,30 @@ class Xpath_Util:
         self.button_contains_xpath = "//%s[contains(%s,'%s')]"%(tag,attr,element)
         return self.button_contains_xpath
 #-------START OF SCRIPT--------
-def xextract(driver,url,session_id):
+def xextract(apr):
 
     #print ("Start of %s"%__file__)
-    #driver = webdriver.Chrome(r"D:\aiml\driver\chromedriver.exe")
-    #driver.get(url)
-    #page = driver.execute_script("return document.body.innerHTML").\
-    #encode('utf-8').decode('latin-1')
-    #soup = BeautifulSoup(page, 'html.parser')
-    #if xpath_obj.generate_xpath(soup,driver,xpath_obj) is False:
-    #    print ("No XPaths generated for the URL:%s"%url)
-    #driver.quit()
     xpath_obj = Xpath_Util()
-    driver2 = webdriver.Remote(command_executor=url,desired_capabilities={})
-    driver2.session_id = session_id
-    page = driver2.execute_script("return document.body.innerHTML").\
-    encode('utf-8').decode('latin-1')#returns the inner HTML as a string
+    driver = webdriver.Chrome(r"D:\aiml\driver\chromedriver.exe")
+    url=r"D:\\aiml\\sourcecode\\javascript.html"
+    driver.get(url)
+    page = driver.execute_script("return document.body.innerHTML").\
+    encode('utf-8').decode('latin-1')
     soup = BeautifulSoup(page, 'html.parser')
-    #execute generate_xpath
-    if xpath_obj.generate_xpath(soup,driver2,xpath_obj) is False:
-        print("1")
+    if xpath_obj.generate_xpath(soup,driver,xpath_obj) is False:
         print ("No XPaths generated for the URL:%s"%url)
     driver.quit()
+    
+    #driver2 = webdriver.Remote(command_executor=url,desired_capabilities={})
+    #driver2.session_id = session_id
+    #page = driver2.execute_script("return document.body.innerHTML").\
+    #encode('utf-8').decode('latin-1')#returns the inner HTML as a string
+    #soup = BeautifulSoup(page, 'html.parser')
+    #execute generate_xpath
+    #if xpath_obj.generate_xpath(soup,driver2,xpath_obj) is False:
+    #    print("1")
+    #    print ("No XPaths generated for the URL:%s"%url)
+    #driver.quit()
 
 #xextract("https://www.netflix.com/in/login")    
 
