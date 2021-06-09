@@ -22,7 +22,7 @@ def xlsx(filepath):
                 row2=cell.row
                 #print(row2)
                 #print(col2)
-            if cell.value == "variables":
+            if cell.value == "arguments":
                 col3=cell.column
                 row3=cell.row
     rows=sheet.max_row
@@ -37,11 +37,12 @@ def xlsx(filepath):
         val2=sheet.cell(row=i,column=col2).value
         val2=val2.split("\n")
         val.append(val2)
-
         val3=sheet.cell(row=i,column=col3).value
         val3=val3.split("\n")
         val.append(val3)
+        #print(val)
         result.append(val)
+    #print(result)
     return result
 
 #auto script generator
@@ -55,15 +56,23 @@ if sys.argv[0] != None:
         filename=element[0]
         testname=element[1]
         variables=element[2]
-        #print(variables)
+        if len(testname)!=len(variables):
+            #print("error")
+            break
+        else:
+            print("ok")
+                      
         try:
-            os.mkdir("D:/aiml/testsuite")
+            os.chdir('/aiml')
+            cwd=os.getcwd()
+            os.mkdir(cwd+"/testsuite")
         except OSError as error:
             pass
 
-            
         try:
-            filepath="D:/aiml/testsuite/{apr}.robot".format(apr=filename)
+            os.chdir('/aiml/testsuite')
+            cwd=os.getcwd()
+            filepath=cwd+"/{apr}.robot".format(apr=filename)
             f=open(filepath,"w+")
         except:
             print("file exist")
@@ -92,37 +101,36 @@ if sys.argv[0] != None:
         f.write("\n***Test Cases***\n")
         f.write("{apr}\n".format(apr=filename))
         f.write("    [Setup]    Test Setup\n\n")
-        f.write("    Launch App    {url}\n\n".format(url=variables[0]))
+        #f.write("    Launch App    {url}\n\n".format(url=variables[0]))
         count_elements=len(testname)
         for i in range(0,count_elements):
-            if testname[i] == "Login":
-                f.write("    ${status}     {key}    {url}    {uname}    {password}\n".format(key=testname[i],status="{status}",url=variables[0],uname=variables[1],password=variables[2]))
-                f.write("    Run Keyword If     \"${status}\"==\"True\"     Log To Console     {key} successful\n".format(key=testname[i],status="{status}"))
-                f.write("    ...    ELSE     Fail     {key} failed\n\n".format(key=testname[i]))
-            if testname[i] == "Search By Title":
-                f.write("    ${status}     {key}    {text}\n".format(key=testname[i],status="{status}",text=variables[3]))
-                f.write("    Run Keyword If     \"${status}\"==\"True\"     Log To Console     {key} successful\n".format(key=testname[i],status="{status}"))
-                f.write("    ...    ELSE     Fail     {key} failed\n\n".format(key=testname[i]))
-            if testname[i] == "Verify Homepage":
+
+            var=variables[i]
+            #print(var)
+            #print(testname[i])
+            result=''
+            if var != 'None':
+                result = [x.strip() for x in var.split(';')]
+                #print(result)
+                #print(len(result))
+
+            if len(result) == 0:
                 f.write("    ${status}     {key}\n".format(key=testname[i],status="{status}"))
                 f.write("    Run Keyword If     \"${status}\"==\"True\"     Log To Console     {key} successful\n".format(key=testname[i],status="{status}"))
                 f.write("    ...    ELSE     Fail     {key} failed\n\n".format(key=testname[i]))
-            if testname[i] == "Go To Profile":
-                f.write("    ${status}     {key}\n".format(key=testname[i],status="{status}"))
+            if len(result) == 1:
+                f.write("    ${status}     {key}    {param1}\n".format(key=testname[i],status="{status}",param1=result[0]))
                 f.write("    Run Keyword If     \"${status}\"==\"True\"     Log To Console     {key} successful\n".format(key=testname[i],status="{status}"))
                 f.write("    ...    ELSE     Fail     {key} failed\n\n".format(key=testname[i]))
-            if testname[i] == "Logout":
-                f.write("    ${status}     {key}\n".format(key=testname[i],status="{status}"))
+            if len(result) == 2:
+                f.write("    ${status}     {key}    {param1}    {param2}\n".format(key=testname[i],status="{status}",param1=result[0],param2=result[1]))
                 f.write("    Run Keyword If     \"${status}\"==\"True\"     Log To Console     {key} successful\n".format(key=testname[i],status="{status}"))
                 f.write("    ...    ELSE     Fail     {key} failed\n\n".format(key=testname[i]))
-            if testname[i] == "Play Video":
-                f.write("    ${status}     {key}\n".format(key=testname[i],status="{status}"))
+            if len(result) == 3:
+                f.write("    ${status}     {key}    {param1}    {param2}    {param3}\n".format(key=testname[i],status="{status}",param1=result[0],param2=result[1],param3=result[2]))
                 f.write("    Run Keyword If     \"${status}\"==\"True\"     Log To Console     {key} successful\n".format(key=testname[i],status="{status}"))
                 f.write("    ...    ELSE     Fail     {key} failed\n\n".format(key=testname[i]))
-            if testname[i] == "Verify Play":
-                f.write("    ${status}     {key}\n".format(key=testname[i],status="{status}"))
-                f.write("    Run Keyword If     \"${status}\"==\"True\"     Log To Console     {key} successful\n".format(key=testname[i],status="{status}"))
-                f.write("    ...    ELSE     Fail     {key} failed\n\n".format(key=testname[i]))
+        
         f.write("    [Teardown]    Run Keyword If Test Failed    Test Fail Teardown\n")
         f.close()
         print("auto script generated successfully for {testname}\n".format(testname=filename))
