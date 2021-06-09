@@ -7,7 +7,7 @@
 
 '''
 
-
+import os
 from imageai.Detection.Custom import CustomObjectDetection
 import os
 import csv
@@ -23,11 +23,15 @@ def detect():
         execution_path = os.getcwd()
         detector = CustomObjectDetection()
         detector.setModelTypeAsYOLOv3()
-        detector.setModelPath(r"D:\aiml\lib\python\detection_model-ex-006--loss-0009.732.h5")
-        detector.setJsonPath(r"D:\aiml\lib\python\detection_config.json")
+        os.chdir('/aiml/lib/python/')
+        cwd=os.getcwd()
+        detector.setModelPath(cwd+"\detection_model-ex-007--loss-0008.640.h5")
+        detector.setJsonPath(cwd+"\detection_config.json")
         detector.loadModel()
         count=0
-        detections = detector.detectObjectsFromImage(input_image=r"D:\\aiml\\screenshot\\input.png", output_image_path=r"D:\\aiml\\screenshot\\output.png")
+        os.chdir('/aiml/screenshot')
+        cwd=os.getcwd()
+        detections = detector.detectObjectsFromImage(input_image=cwd+"\input.png", output_image_path=cwd+"\output.png")
         wb= openpyxl.Workbook()
         sheet=wb.active
         i=1
@@ -52,7 +56,9 @@ def detect():
                 break
                 print(midpoint(eachObject["name"],eachObject["box_points"]))
                 count=0
-        wb.save("D:\\aiml\\variables\\coordinates.xlsx")
+        os.chdir('/aiml/variables')
+        cwd=os.getcwd()
+        wb.save(cwd+"\coordinates.xlsx")
 
 #detect()
 
@@ -70,6 +76,7 @@ from selenium import webdriver
 from bs4 import BeautifulSoup
 import re
 import openpyxl
+import os
 wb=openpyxl.Workbook()
 sheet=wb.active
 class Xpath_Util:
@@ -171,8 +178,10 @@ class Xpath_Util:
                             i=i+1
                             c1=sheet.cell(row=i,column=j)
                             c1.value="We are not supporting this gussable element"           
-                            print("We are not supporting this gussable element")   
-        wb.save("D:\\aiml\\variables\\xpath_only.xlsx")
+                            print("We are not supporting this gussable element") 
+        os.chdir('/aiml/variables')
+        cwd=os.getcwd()
+        wb.save(cwd+r"\xpath_only.xlsx")
         return result_flag
               
             
@@ -239,8 +248,12 @@ def xextract(apr):
 
     #print ("Start of %s"%__file__)
     xpath_obj = Xpath_Util()
-    driver = webdriver.Chrome(r"D:\aiml\driver\chromedriver.exe")
-    url=r"D:\\aiml\\sourcecode\\javascript.html"
+    os.chdir('/aiml/driver')
+    cwd=os.getcwd()
+    driver = webdriver.Chrome(cwd+"\chromedriver.exe")
+    os.chdir('/aiml/sourcecode')
+    cwd=os.getcwd()
+    url=cwd+"\javascript.html"
     driver.get(url)
     page = driver.execute_script("return document.body.innerHTML").\
     encode('utf-8').decode('latin-1')
@@ -272,7 +285,9 @@ def merger():
     pas=['input_password','pass','passowrd','input_id_password','input_ap_password','input_password']
     btn=['button_sign_in','sign_in','button_signin','input_signinsubmit','button_sign_in','input_submit_sign_in','button_login','input_submit_continue']
     
-    workbook1 = load_workbook(filename=r"D:\aiml\variables\coordinates.xlsx")
+    os.chdir('/aiml/variables')
+    cwd=os.getcwd()
+    workbook1 = load_workbook(filename=cwd+"\coordinates.xlsx")
     sheet2=workbook1.active
     for row in sheet2.iter_rows(min_row=1,max_row=1):
         for cell in row:
@@ -288,7 +303,7 @@ def merger():
                 # print(col2)
     
     
-    workbook = load_workbook(filename=r"D:\\aiml\\variables\\xpath_only.xlsx")
+    workbook = load_workbook(filename=cwd+r"\xpath_only.xlsx")
     sheet=workbook.active
     for row in sheet.iter_rows(min_row=1,max_row=1):
         for cell in row:
@@ -348,17 +363,7 @@ def merger():
                     wr=sheet2.cell(row=j,column=col4+1)
                     wr.value=x
                     
-    workbook1.save("D:\\aiml\\variables\\coordinates.xlsx")
+    workbook1.save(cwd+"\coordinates.xlsx")
     
     
 #merger()
-
-
-def session_creator(url, cookies):
-    from selenium import webdriver
-    driver = webdriver.Chrome()
-    executor_url = driver.command_executor._url
-    session_id = driver.session_id
-    driver.get(url)
-    #driver.quit()
-    xextract(driver,executor_url, session_id)
